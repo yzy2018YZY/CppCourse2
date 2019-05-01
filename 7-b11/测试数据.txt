@@ -1,0 +1,11 @@
+./7-b11 1859999 1859998 7-b2.cpp 80 screen
+./7-b11 1859999 1859998 all 75 7-b2.dat
+./7-b11 1859999 all 7-b2.cpp 80 screen
+./7-b11 1859999 all all 70 screen
+./7-b11 all all all 85 final.dat
+./7-b11 1859999 1859998 7-b2.cpp 50 screen
+./7-b11 all 1859998 all 85 final.dat
+./7-b11 185abcd 1859998 3-b2.cpp 80 screen
+./7-b11 1859999 18599998 3-b2.cpp 80 screen
+./7-b11 185abcd 18599998 3-b2.cpp 80 screen
+./7-b11 185abcd 18599998 3-b2.cpp 80
