@@ -21,8 +21,8 @@ bool Cube::input()
 {
 	double _length, _width, _height;
 	cin >> _length >> _width >> _height;
-	if (_length < 0 || _width < 0 || _height < 0)	//·ÀÖ¹ÊäÈë´íÎóµÄÊý×Ö
-		return false;
+	//if (_length < 0 || _width < 0 || _height < 0)	//·ÀÖ¹ÊäÈë´íÎóµÄÊý×Ö
+	//	return false;
 	this->length = _length;
 	this->width = _width;
 	this->height = _height;

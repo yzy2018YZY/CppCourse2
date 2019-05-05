@@ -146,7 +146,7 @@ int main()
 	LinkList L;
 	InitList(&L);
 	
-	printf("请输入要插入的元素（学号、姓名、性别、分数、地址），错误的输入会退出\n");
+	printf("请输入要插入的元素（学号、姓名、性别、分数、地址），错误的输入会退出（例如学号输入了abc）\n");
 	while (scanf("%d%s%s%f%s", &s1.num, s1.name, tempStr, &s1.score, &s1.addr) == 5)
 	{
 		s1.sex = tempStr[0];
@@ -160,7 +160,7 @@ int main()
 		printf("在尾节点(%d)后插入：\n", ListLength(L));
 		ListInsert_Dul(&L, ListLength(L) + 1, &s1);
 		ListTraverse(L);
-		printf("请输入要插入的元素（学号、姓名、性别、分数、地址），错误的输入会退出：\n");
+		printf("请输入要插入的元素（学号、姓名、性别、分数、地址），错误的输入会退出（例如学号输入了abc）：\n");
 	}
 
 	printf("销毁链表\n");

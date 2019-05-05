@@ -19,18 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="7-b27-linear_list_L.c" />
-    <ClCompile Include="7-b27-linear_list_L_main.c" />
+    <ClCompile Include="7-b29-linear_list_L.c" />
+    <ClCompile Include="7-b29-linear_list_L_main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="7-b27-linear_list_L.h" />
+    <ClInclude Include="7-b29-linear_list_L.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{059CC7C4-65AA-41E6-BF3B-508AE274505F}</ProjectGuid>
-    <RootNamespace>My7b27</RootNamespace>
+    <ProjectGuid>{55479F02-8540-4D80-B6F5-B60254AA733E}</ProjectGuid>
+    <RootNamespace>My7b29</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <ProjectName>7-b27</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -85,9 +84,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

@@ -18,19 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="7-b27-linear_list_L.c" />
-    <ClCompile Include="7-b27-linear_list_L_main.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="7-b27-linear_list_L.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{059CC7C4-65AA-41E6-BF3B-508AE274505F}</ProjectGuid>
-    <RootNamespace>My7b27</RootNamespace>
+    <ProjectGuid>{E7D3D206-2E24-4165-B89D-CB93054660CC}</ProjectGuid>
+    <RootNamespace>My7b30</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <ProjectName>7-b27</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -85,9 +77,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -125,6 +114,13 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="7-b30-linear_list_L.c" />
+    <ClCompile Include="7-b30-linear_list_L_main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="7-b30-linear_list_L.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

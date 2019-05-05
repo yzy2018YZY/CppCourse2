@@ -208,7 +208,7 @@ int main()
 	ListTraverse(L);
 	while (ListLength(L) > 0)	//链表为空时退出
 	{
-		printf("请输入要删除数据的学号，错误的输入会退出：\n");
+		printf("请输入要删除数据的学号，错误的输入会退出（例如学号输入了abc）：\n");
 		if (scanf("%d", &num) != 1) //输入错误的数字时退出
 			break;
 		e1->num = num;
