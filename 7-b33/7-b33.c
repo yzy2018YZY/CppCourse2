@@ -108,46 +108,38 @@ int LocateElem(LinkList L, ElemType e, Status(*compare)(ElemType e1, ElemType e2
 	return (p != L) ? pos : 0;
 }
 
-
 /* 遍历线性表 */
 Status ListTraverse(LinkList L)
 {
-	LinkList p = L->next;	//指向首元
+	LinkList p = L->prior;	//指向首元
 
 	while (p != L)	//遍历所有节点
 	{
 		printf("%d-%s-%c-%f-%s->\n", p->data->num, p->data->name, p->data->sex, p->data->score, p->data->addr);
-		p = p->next;
+		p = p->prior;
 	}
 
 	return OK;
 }
 
-/*获取元素所在的指针，正数为正向计数，负数为反向计数*/
+/*获取元素所在的指针*/
 LinkList GetElemP_Dul(LinkList L, int i)
 {
-	LinkList p = L->next;	//指向首元结点
-	int pos = 1;	//初始位置为1
+	if (L == 0 || i <= 0)	//链表不能为NULL并且i需要大于0
+		return NULL;
+	LinkList p = L->prior;	//指向首元结点
+	int pos = 1;			//初始位置为1
 
-	/* 链表不为NULL 且 未到第i个元素 */
-	if (i >= 1)	//正向搜索
+	while (pos < i && p != L)	//未到第i个元素并且未到达末尾
 	{
-		while (pos < i)
-		{
-			p = p->next;
-			pos++;
-		}
-	}
-	else		//逆向搜索
-	{
-		while (pos > i)
-		{
-			p = p->prior;
-			pos--;
-		}
+		p = p->prior;
+		pos++;
 	}
 
-	return p;
+	if (pos < i && p == L)	//i超出了范围
+		return NULL;
+	else
+		return p;
 }
 
 /*在指定位置插入元素，正数为正向计数，负数为反向计数*/
@@ -176,7 +168,7 @@ Status ListDelete_Dul(LinkList *L, int i, ElemType e)
 {
 	LinkList p = (*L)->next;
 
-	if (!(p = GetElemP_Dul(*L, i)))	//在L中确定删除位置
+	if (!(p = GetElemP_Dul(*L, i)) || p == *L)	//在L中确定删除位置，这里与书上的实现不同，需要考虑到i的范围问题（2.18与2.19的i范围不同），不能删除头结点
 		return ERROR;
 
 	memcpy(e, p->data, sizeof(ET));	//复制数据
@@ -191,7 +183,8 @@ Status ListDelete_Dul(LinkList *L, int i, ElemType e)
 int main()
 {
 	char tempStr[100] = "";
-	ET       e[] = { {1001, "张三", 'M', 76.5, "上海市杨浦区"},
+	ET       e[] = { 
+		  {1001, "张三", 'M', 76.5, "上海市杨浦区"},
 		  {1002, "李四", 'F', 87, "上海市普陀区"},
 		  {1003, "王五", 'M', 80, "浙江省杭州市"},
 		  {1004, "赵六", 'M', 54, "浙江省绍兴市"},
@@ -202,31 +195,40 @@ int main()
 	InitList(&L);
 	e1 = (ElemType)malloc(sizeof(ET));
 	int i, num;
-	for (i = 5; i >= 0; i--)
-		ListInsert_Dul(&L, 1, e + i);
+	for (i = sizeof(e) / sizeof(ET) - 1; i >= 0; i--)
+		ListInsert_Dul(&L, ListLength(L) + 1, e + i);
 
 	ListTraverse(L);
 	while (ListLength(L) > 0)	//链表为空时退出
 	{
-		printf("请输入要删除数据的学号，错误的输入会退出（例如学号输入了abc）：\n");
-		if (scanf("%d", &num) != 1) //输入错误的数字时退出
+		printf("\n删除首元元素\n");
+		if (ListDelete_Dul(&L, 1, e1))
+			printf("删除首元元素完成\n");
+		else
+			printf("首元元素不存在\n");
+		if (ListLength(L) <= 0)
 			break;
-		e1->num = num;
-		if ((i = LocateElem(L, e1, compare)) > 0)	//删除节点
-		{
-			printf("%d\n", i);
-			ListDelete_Dul(&L, i, e1);
-			printf("删除%d完成\n", num);
-			ListTraverse(L);
-		}
-		else	//没有找到节点
-		{
-			printf("没有找到%d\n", num);
-		}
+		ListTraverse(L);
+		printf("\n请输入要删除数据的序号（注意逆序），错误的输入会退出（例如输入了abc）：\n");
+		if (scanf("%d", &num) != 1)	//输入错误的数字时退出
+			break;
+		if (ListDelete_Dul(&L, num, e1))
+			printf("删除第%d个元素完成\n", num);
+		else
+			printf("第%d个元素不存在\n", num);
+		if (ListLength(L) <= 0)
+			break;
+		ListTraverse(L);
+		printf("\n删除末尾元素\n");
+		if (ListDelete_Dul(&L, ListLength(L), e1))
+			printf("删除末尾元素完成\n");
+		else
+			printf("末尾元素不存在\n");
+		ListTraverse(L);
 	}
 
 	free(e1);
-	printf("销毁链表\n");
+	printf("\n销毁链表\n");
 	DestroyList(&L);
 	return 0;
 }

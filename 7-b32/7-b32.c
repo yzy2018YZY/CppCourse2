@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #ifdef _MSC_VER
 #include <Windows.h>
@@ -95,34 +94,27 @@ Status ListTraverse(LinkList L)
 	return OK;
 }
 
-/*获取元素所在的指针，正数为正向计数，负数为反向计数*/
+/*获取元素所在的指针*/
 LinkList GetElemP_Dul(LinkList L, int i)
 {
+	if (L == 0 || i <= 0)	//链表不能为NULL并且i需要大于0
+		return NULL;
 	LinkList p = L->next;	//指向首元结点
 	int pos = 1;			//初始位置为1
 
-	/* 链表不为NULL 且 未到第i个元素 */
-	if (i >= 1)	//正向搜索
+	while (pos < i && p != L)	//未到第i个元素并且未到达末尾
 	{
-		while (pos < i)
-		{
-			p = p->next;
-			pos++;
-		}
+		p = p->next;
+		pos++;
 	}
-	else		//逆向搜索
-	{
-		while (pos > i)
-		{
-			p = p->prior;
-			pos--;
-		}
-	}
-
-	return p;
+	
+	if (pos < i && p == L)	//i超出了范围
+		return NULL;
+	else
+		return p;
 }
 
-/*在指定位置插入元素，正数为正向计数，负数为反向计数*/
+/*在指定位置插入元素*/
 Status ListInsert_Dul(LinkList *L, int i, ElemType *e)
 {
 	LinkList p, s;
@@ -141,7 +133,7 @@ Status ListInsert_Dul(LinkList *L, int i, ElemType *e)
 int main()
 {
 	char tempStr[100] = "";
-	srand((unsigned int)time(0));
+	int index;
 	ElemType s1;
 	LinkList L;
 	InitList(&L);
@@ -150,20 +142,24 @@ int main()
 	while (scanf("%d%s%s%f%s", &s1.num, s1.name, tempStr, &s1.score, &s1.addr) == 5)
 	{
 		s1.sex = tempStr[0];
-		printf("在首元之前插入：\n");
-		ListInsert_Dul(&L, 0, &s1);
+		printf("\n请输入要插入的位置，错误的输入会退出（例如输入了abc）\n");
+		while (scanf("%d", &index) != 1)
+			break;
+		printf("\n在首元(1)之前插入：\n");
+		ListInsert_Dul(&L, 1, &s1);
 		ListTraverse(L);
-		int ran = rand() % ListLength(L) + 1;
-		printf("在中间(%d)插入：\n", ran);
-		ListInsert_Dul(&L, ran, &s1);
+		if (ListInsert_Dul(&L, index, &s1) == OK)
+			printf("\n在中间(%d)插入：\n", index);
+		else
+			printf("\n无法在第%d个位置插入\n", index);
 		ListTraverse(L);
-		printf("在尾节点(%d)后插入：\n", ListLength(L));
+		printf("\n在尾节点(%d)后插入：\n", ListLength(L));
 		ListInsert_Dul(&L, ListLength(L) + 1, &s1);
 		ListTraverse(L);
-		printf("请输入要插入的元素（学号、姓名、性别、分数、地址），错误的输入会退出（例如学号输入了abc）：\n");
+		printf("\n请输入要插入的元素（学号、姓名、性别、分数、地址），错误的输入会退出（例如学号输入了abc）：\n");
 	}
 
-	printf("销毁链表\n");
+	printf("\n销毁链表\n");
 	DestroyList(&L);
 	return 0;
 }

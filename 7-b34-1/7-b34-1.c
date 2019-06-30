@@ -160,11 +160,13 @@ int main()
 	p = L->next;
 	q = L;
 	JumpList(L, (k - 1) % n, &q, &p);	//向前移动(k-1)%n次
+	printf("出列顺序：\n");
 	while (ListLength(L) > 1)	//直到只剩1人
 	{
 		JumpList(L, (m - 1) % n, &q, &p);	//跳过(m-1)%n人
 		printf("%d\n", p->data);	//输出被删除的节点
 		ListDelete(L, &q, &p);	//删除p节点
+		n--;	//总人数变动
 	}
 	printf("%d\n", L->next->data);
 	DestroyList(&L);

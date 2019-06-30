@@ -7,6 +7,7 @@ const int N = 3;
 
 class Cube
 {
+private:
 	double length;
 	double width;
 	double height;
@@ -23,9 +24,12 @@ bool Cube::input()
 	cin >> _length >> _width >> _height;
 	//if (_length < 0 || _width < 0 || _height < 0)	//·ÀÖ¹ÊäÈë´íÎóµÄÊý×Ö
 	//	return false;
+	cin.clear();
+	cin.ignore(9999, '\n');
 	this->length = _length;
 	this->width = _width;
 	this->height = _height;
+	//this->vol = 0;
 	return true;
 }
 

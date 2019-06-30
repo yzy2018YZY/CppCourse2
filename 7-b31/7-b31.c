@@ -145,11 +145,16 @@ Status SetDifference(LinkList La, LinkList Lb)
 int main()
 {
 	LinkList La, Lb;
+	printf("请输入集合A的各个元素，用空格隔开，-1结束：\n");
 	SetCreate(&La);
+	printf("请输入集合B的各个元素，用空格隔开，-1结束：\n");
 	SetCreate(&Lb);
+	printf("集合A中的元素为：\n");
 	ListTraverse(La);
+	printf("集合B中的元素为：\n");
 	ListTraverse(Lb);
 	SetDifference(La, Lb);
+	printf("计算后的集合为：\n");
 	ListTraverse(La);
 	DestroyList(&La);
 	DestroyList(&Lb);
